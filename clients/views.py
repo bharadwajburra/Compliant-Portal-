@@ -21,7 +21,8 @@ def escalatetick(request,id):
 	current_holder=employee.emp_id
 	current_holder_name = employee.name
 	current_holder_email=employee.email
-	ticket=Ticket.objects.filter(id=id).update(current_holder=current_holder,current_holder_name=current_holder_name,current_holder_email=current_holder_email)
+	Ticket.objects.filter(id=id).update(current_holder=current_holder,current_holder_name=current_holder_name,current_holder_email=current_holder_email)
+	ticket = Ticket.objects.filter(id=id).first()
 	employee.save()
 	subject1='Ticket Escalated Succesfully'
 	message='Your ticket has been Escalated'+'\n'
