@@ -1,0 +1,1 @@
+<head><title>Client View</title></head><body>	<table>    {% for employee in 	employees %}      {{employee.name }} <br> <a href="removeEmployee/{{employee.id}}">Remove Employee</a>    {% endfor %}	</table>	<a href="addEmployee">Add Employee</a></body>

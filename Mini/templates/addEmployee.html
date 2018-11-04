@@ -1,0 +1,40 @@
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<title>Add Employee</title></head>
+<body>
+{% if message %}
+{{message}}
+{% endif %}
+
+<form action="addEmp" method="POST">
+<div class="container">
+		<table border="1" class="table table-hover">	
+{% csrf_token %}
+<tr>
+<td >Name of the employee:<input type="text" id="name" name="name"></div><br></td>
+</tr>
+<tr>
+<div align="center"><td>Email ID of the employee:<input type="email" id="email" name="email"><br></td></div>
+</tr>
+<tr>
+<div align="center"><td>Level of the employee:
+<select id="level" name="level">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4" selected>4</option>
+</select></td></div>
+</tr>
+<br>
+
+</table>
+</div>
+<div align="center"><input type="submit" class="btn btn-primary"></div>
+</form>
+
+</body>
+</html>

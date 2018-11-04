@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<head>
+	{% if user.is_authenticated %}
+		<html>
+		<div>Hello {{request.user.username}}!</div>
+		</html>
+	request.redirect('home.html')
+	{% endif %}
+	{% load static %}
+	<title>Homepage</title>
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+
+</head>
+<body>
+<div>
+
+		<a href="{% url 'login' %}" class="nav-link">Login</a>
+		<a href="{% url 'signup' %}" class="nav-link">Signup</a>
+
+
+</div>
+</body>
+</html>

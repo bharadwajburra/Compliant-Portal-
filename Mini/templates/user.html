@@ -1,0 +1,41 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<html>
+<head>
+Client
+</head>
+<body>
+<form action="raise\1\" method="POST">
+{% csrf_token %}
+<h1>Raise Ticket</h1>
+Subject:<input type="text" id="subject" name="subject">
+Description:<input type="text" id="desc" name="desc">
+<input type="submit">
+</form>
+<div class="container">
+		<table border="1" class="table table-hover">	
+
+<h1>Raised</h1>
+<tr>
+<thead>
+<th>Subject</th>
+<th>Current Holder</th>
+<th>Current Holder Name</th>
+<th>Raised Time</th>
+</thead>
+</tr>
+{% for ticket in tickets %}
+<tr>
+<td>{{ticket.subject}}</td>
+<td>{{ticket.current_holder}}</td>
+<td>{{ticket.current_holder_name}}</td>
+<td>{{ticket.raised_time}}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+</body>
+</html>
