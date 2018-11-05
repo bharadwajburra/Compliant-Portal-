@@ -11,6 +11,14 @@ import re
 NAME_REGEX=re.compile('[A-Za-z\s]+')
 EMAIL_REGEX=re.compile("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 # Create your views here.
+def generate_username(name):
+	count=1
+	check=name
+	while User.objects.filter(username=check).count()!=0:
+		print(check)
+		check=name+str(count)
+		count=count+1
+	return check
 def escalatetick(request,id):
 	employee = Employee.objects.filter(emp_id=request.user.id).first()
 	employee.count=employee.count-1
@@ -40,9 +48,13 @@ def escalatetick(request,id):
 	return HttpResponseRedirect(reverse("employee"))
 	#return render(request,"employee.html",{'tickets':Ticket.objects.all().filter(current_holder=request.user.id)})
 def closetick(request,id):
-	Ticket.objects.filter(id=id).delete()
-	return HttpResponseRedirect(reverse("employee"))
-	#return render(request,"employee.html",{'tickets':Ticket.objects.all().filter(current_holder=request.user.id)})
+	if request.user.first_name=="user":
+		Ticket.objects.filter(id=id).delete()
+		return HttpResponseRedirect(reverse("user"))
+	else:
+		Ticket.objects.filter(id=id).delete()
+		return HttpResponseRedirect(reverse("employee"))
+
 def home(request):
 	if request.user.first_name=="client":
 		return HttpResponseRedirect(reverse("client"))
@@ -101,11 +113,12 @@ def addEmp(request):
 			errors.append('Name should contain only alphabets and spaces!')
 			return render(request,"addEmployee.html",{'errors':errors})
 		print(NAME_REGEX.fullmatch(name))
+		username = generate_username(name)
 		password=User.objects.make_random_password()
 		email = request.POST.get('email')
 		level=request.POST.get('level')
 		user = User.objects.create_user(
-				username = name,
+				username = username,
 				password = password,
 				email = email,
 				first_name="employee",
@@ -119,7 +132,7 @@ def addEmp(request):
 		message='Hello '+employee.name+'!'+'\n'
 		message+='Welcome to ESCCOM Family!'+'\n'
 		message+='Your Account has been Succesfully generated in the portal'+'\n'
-		message+='Your Login id :'+name+'\n'
+		message+='Your Login id :'+username+'\n'
 		message+='Your Password :'+password+'\n'
 		message+='\n'+'\n'+'Regards,\n'+'ESCCOM'+'\n'
 		to=[]
@@ -156,5 +169,5 @@ def raisetick(request):
 	recipient_list.append(str(request.user.email))
 	print(recipient_list)
 	print(send_mail(subject1,message,'mobilemoth@gmail.com',recipient_list,fail_silently=False))
-	return render(request,"user.html",{'tickets':tickets})
+	return HttpResponseRedirect(reverse("user"))
  

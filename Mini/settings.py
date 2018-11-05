@@ -34,9 +34,9 @@ DEBUG = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 DATABASES={}
-DATABASES['default'] = dj_database_url.config(
-    default='DATABASE_URL_HERE'
-)
+#DATABASES['default'] = dj_database_url.config(
+#    default='DATABASE_URL_HERE'
+#)
 
 # Application definition
 

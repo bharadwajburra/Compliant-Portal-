@@ -24,14 +24,14 @@
 		<table border="1" class="table table-hover">	
 {% csrf_token %}
 <tr>
-<td >Name of the employee:<input type="text" id="name" name="name"></div><br></td>
+<td >Name of the employee:<input type="text" id="name" name="name" required="true"></div><br></td>
 </tr>
 <tr>
-<div align="center"><td>Email ID of the employee:<input type="email" id="email" name="email"><br></td></div>
+<div align="center"><td>Email ID of the employee:<input type="email" id="email" name="email" required="True"><br></td></div>
 </tr>
 <tr>
 <div align="center"><td>Level of the employee:
-<select id="level" name="level">
+<select id="level" name="level" required="True">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
